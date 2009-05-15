@@ -52,14 +52,13 @@ class ObsoleteVersionError(ValueError):
 
 def b2i_uint(arr, offset, num_bytes):
     rval = 0
-    for i in xrange(offset + num_bytes - 1, offset - 1, -1):
+    for i in xrange(offset , offset + num_bytes):
         rval = (rval << 8) | arr[i]
     return rval
 
-
 def i2b_uint_len(n):
     for i in xrange(1, 8 + 1):
-        if n < (i << 8):
+        if n < (1 << (8 * i)):
             return i
     raise ValueError("%r will not fit in 64-bits" % (n,))
 
